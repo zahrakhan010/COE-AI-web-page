@@ -198,8 +198,8 @@ h2 {
 }
 
 .heading-icon {
-    width: 15px;  /* Set desired width */
-    height: 15px; /* Set desired height */
+    width: 20px;  /* Set desired width */
+    height: 20px; /* Set desired height */
     object-fit: contain; /* Ensures the aspect ratio is maintained */
     margin-right: 10px; /* Space between icon and text */
 }
