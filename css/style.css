@@ -213,8 +213,15 @@ background-color:#fff;
     line-height: 1.5;
 }
 
-/* Style the search box if needed */
-.gcse-searchbox-only {
+.gcse-search {
     margin-top: 20px;
-    width: 100%; /* Full-width search bar */
 }
+
+.gcse-searchresults {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
