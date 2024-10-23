@@ -218,7 +218,7 @@ section {
 }
 
 #searchResults {
-    flex: 1; 
+    flex: 2; 
     padding: 20px; 
     border-right: 1px solid #ddd; /* Optional: Add a border between columns */
     height: 800px; /* Set a specific height */
