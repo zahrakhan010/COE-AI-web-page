@@ -198,7 +198,7 @@ h2 {
 }
 
 .heading-icon {
-    width: 20px; /* Icon size */
+    width: 100px; /* Icon size */
     height: auto;
     margin-right: 10px; /* Space between icon and text */
 }
