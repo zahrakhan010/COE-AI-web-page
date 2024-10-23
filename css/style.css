@@ -211,6 +211,7 @@ h2 img {
 
 
 /* adding styling to the search engine */
+/* Adding styling to the search engine */
 section {
     display: flex;
     height: calc(100vh - 120px); /* Adjust as necessary */
@@ -220,8 +221,45 @@ section {
     flex: 1; 
     padding: 20px; 
     border-right: 1px solid #ddd; /* Optional: Add a border between columns */
+    height: 400px; /* Set a specific height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    background-color: #ffffff; /* Set a background color */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+#searchResults h2 {
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    color: #333; /* Text color */
+    margin-bottom: 20px; /* Space below heading */
 }
 
 #searchResults .gcse-search {
     margin-bottom: 20px; /* Space between search box and results */
 }
+
+/* Styling for the search result links */
+.gcse-searchresults-only a {
+    display: block; /* Make the link take up the full width */
+    padding: 10px; /* Add padding for clickable area */
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.gcse-searchresults-only a:hover {
+    background-color: #f1f1f1; /* Highlight on hover */
+}
+
+.gcse-searchresults-only p {
+    margin: 5px 0; /* Space between paragraphs */
+    color: #555; /* Text color for additional info */
+}
+
+#linkDetails {
+    flex: 1; /* Adjust width as needed */
+    padding: 20px;
+}
+
