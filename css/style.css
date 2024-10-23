@@ -188,3 +188,16 @@ background-color:#fff;
 
 
 /* adding styling to the search engine */
+.gcse-search {
+	margin-bottom: 20px;
+}
+
+#searchResults {
+	flex: 0 0 40%; /* Reduced size for the search results section */
+	height: 100%;
+	border: 1px solid #ddd;
+	background-color: white;
+	overflow-y: auto;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	padding: 10px;
+}
