@@ -188,16 +188,34 @@ background-color:#fff;
 
 
 /* adding styling to the search engine */
-.gcse-search {
-	margin-bottom: 20px;
+#searchResults {
+    padding: 20px;
+    background-color: white; /* Background color for visibility */
+    border: 1px solid #ddd; /* Border for definition */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-#searchResults {
-	flex: 0 0 40%; /* Reduced size for the search results section */
-	height: 100%;
-	border: 1px solid #ddd;
-	background-color: white;
-	overflow-y: auto;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-	padding: 10px;
+.gcse-search {
+    margin-bottom: 15px; /* Space between the search box and results */
+}
+
+#results {
+    border-top: 1px solid #ddd; /* Divider line above results */
+    padding-top: 10px; /* Space above results */
+}
+
+.gcse-searchresults-only {
+    margin-top: 10px; /* Space between the search results and search box */
+    max-height: 400px; /* Limit the height of search results */
+    overflow-y: auto; /* Scroll for overflowing content */
+}
+
+.gcse-searchresults-only .gsc-webResult {
+    padding: 10px; /* Padding inside each result */
+    border-bottom: 1px solid #ddd; /* Divider for each result */
+}
+
+.gcse-searchresults-only .gsc-webResult:hover {
+    background-color: #f0f0f0; /* Change background on hover */
 }
