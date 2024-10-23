@@ -188,6 +188,24 @@ background-color:#fff;
 
 /* styling paragraph to right click to open link in new tab  */
 
+h2 {
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    color: #333; /* Text color */
+    margin-bottom: 20px; /* Space below heading */
+}
+
+.heading-icon {
+    width: 25px; /* Icon size */
+    height: auto;
+    margin-right: 10px; /* Space between icon and text */
+}
+
+h2 img {
+    vertical-align: middle; /* Align icon with text */
+}
 
 
 /* adding styling to the search engine */
