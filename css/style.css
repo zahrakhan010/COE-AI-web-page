@@ -214,7 +214,20 @@ background-color:#fff;
 }
 
 /* Style the search box if needed */
-.gcse-searchbox-only {
+.gcse-searchresults {
     margin-top: 20px;
-    width: 100%; /* Full-width search bar */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
+
+.gcse-searchresults .gsc-result {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.gcse-searchresults .gsc-result:hover {
+    background-color: #f0f0f0;
+}
+
