@@ -214,7 +214,7 @@ background-color:#fff;
 }
 
 /* Style the search box if needed */
-.gcse-searchresults {
+/* .gcse-searchresults {
     margin-top: 20px;
     background-color: #f9f9f9;
     padding: 20px;
@@ -229,5 +229,35 @@ background-color:#fff;
 
 .gcse-searchresults .gsc-result:hover {
     background-color: #f0f0f0;
+} */
+
+/* styling forserach results adding abstracts and links */
+
+.search-results {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
 }
 
+.results-column {
+    flex: 1;
+    padding-right: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.abstract-column {
+    flex: 1;
+    padding-left: 20px;
+}
+
+#abstract-text {
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+#paper-link {
+    display: block;
+    margin-top: 10px;
+    color: blue;
+}
