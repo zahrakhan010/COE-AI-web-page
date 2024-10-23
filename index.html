@@ -1,133 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WEB PRAROZ</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+	<title> WEB PRAROZ</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+
 </head>
 <body>
-    <header>
-        <div class="main">
-            <div class="logo">
-                <img src="bahria-university-logo.png" alt="Logo">
-            </div>
-            <div class="title">
-                <h1>AI-Driven Research <br> Review Platform</h1>
-            </div>
-            <div class="button">
-                <a href="https://www.youtube.com/watch?v=rJJPS-EvNfk" class="btn">WATCH VIDEO</a>
-                <a href="https://www.youtube.com/playlist?list=PLuD7pwCp4AA4gLBaWeU7ymZVHGWMLAeDO" class="btn">BASIC SKILLS</a>
-                <a href="https://www.youtube.com/playlist?list=PLTPXxbhUt-YWjMCDahwdVye8HW69p5NYS" class="btn">LEARN MORE</a>
-            </div>
-        </div>
-    </header>
+	<header>
+		<div class="main">
+		<div class="logo">
 
-    <section class="features">
-        <div class="features-content">
-            <h1>Search for Research Papers</h1>
-            <h2>Ask a research question and get back a list of relevant papers from our database of 125 million.</h2>
-            <ul class="feature-list">
-                <li><i class="fa fa-check-circle"></i> Get one-sentence abstract summaries.</li>
-                <li><i class="fa fa-check-circle"></i> Select relevant papers and search for more like them.</li>
-                <li><i class="fa fa-check-circle"></i> Extract details from papers into an organized table.</li>
-            </ul>
-        </div>
-        <div class="features-image">
-            <img src="images/buss.jpg" alt="Research Image">
-        </div>
-    </section>
+			<img src="bahria-university-logo.png">
+		</div>
+		
+		 <!-- <ul>
+		 <li class="active"><a href="#"><i class="fa fa-home"></i>Home</a></li>
+		 <li><a href="#">About</a></li>
+		 <li><a href="#">Dessert</a></li>
+		 <li><a href="#">Appetizers</a></li>
+		 <li><a href="#">Pasta</a></li>
+		 <li><a href="#">Salad</a></li>
+		 <li><a href="#">Burger</a></li>
+		 <li><a href="#">Pizza</a></li>
+		 <li><a href="#"><i class="fa fa-caret-down"></i> More Recipes <i class="fa fa-caret-down"></i></a>
+		 	<div class="sub-menu">
+		 		<ul>	 
+		 		 <li><a href="#">Cookies</a></li>
+		 		 <li><a href="#">Sandwich</a></li>
+		 	 </ul>
+		 	</div>
+		 </li>
+		</ul> -->
 
-    <!-- Section for searching papers -->
-    <section class="field-search">
-        <div class="field-search-content">
-            <h2><img src="images/search-icon.png" alt="Search Icon" class="heading-icon" /> Search Papers According to Your Field</h2>
-            <p>Find the most relevant papers tailored to your specific research area.</p>
+		 </div>
+		 <div class="title">
+		 	<h1>AI-Driven Research <br> Review Platform</h1>
+		 </div>
+		 <div class="button">
+		 	<a href="https://www.youtube.com/watch?v=rJJPS-EvNfk" class="btn">WATCH VIDEO</a>
+		 	<a href="https://www.youtube.com/playlist?list=PLuD7pwCp4AA4gLBaWeU7ymZVHGWMLAeDO" class="btn">BASIC SKILLS</a>
+		 	<a href="https://www.youtube.com/playlist?list=PLTPXxbhUt-YWjMCDahwdVye8HW69p5NYS" class="btn">LEARN MORE</a>
+		 </div>
 
-            <script async src="https://cse.google.com/cse.js?cx=c57cd31c36a8f42b1"></script>
-            <div class="gcse-searchbox"></div>
-            <div class="gcse-searchresults"></div>
-        </div>
-    </section>
+		 	</header>
 
-    <!-- Results Section -->
-    <section class="search-results">
-        <div class="results-column">
-            <h2>Search Results</h2>
-            <ul id="results-list"></ul>
-        </div>
-        <div class="abstract-column">
-            <h2>Abstract & Details</h2>
-            <div id="abstract-text">Select a paper to see its abstract here.</div>
-            <a id="paper-link" href="#" target="_blank" style="display:none;">Read Full Paper</a>
-        </div>
-    </section>
 
-    <script>
-        // Add a listener for search results
-        document.addEventListener('DOMContentLoaded', () => {
-            // Fetching results logic (example, needs proper integration)
-            const resultsList = document.getElementById('results-list');
+			<section class="features">
+				<div class="features-content">
+					<h1>Search for Research Papers</h1>
+					<h2>Ask a research question and get back a list of relevant papers from our database of 125 million.</h2>
+					<ul class="feature-list">
+						<li><i class="fa fa-check-circle"></i> Get one-sentence abstract summaries.</li>
+						<li><i class="fa fa-check-circle"></i> Select relevant papers and search for more like them.</li>
+						<li><i class="fa fa-check-circle"></i> Extract details from papers into an organized table.</li>
+					</ul>
+				</div>
+				<div class="features-image">
+					<img src="images/buss.jpg" alt="Research Image" />
+				</div>
+			</section>
 
-            // Example results; this should be populated from the actual search results.
-            const exampleResults = [
-                { title: "Paper Title 1", url: "https://pubmed.ncbi.nlm.nih.gov/12345678" },
-                { title: "Paper Title 2", url: "https://www.semanticscholar.org/paper/abcdefg" },
-                { title: "Paper Title 3", url: "https://www.sciencedirect.com/science/article/abs/pii/S123456789" },
-            ];
-
-            exampleResults.forEach(result => {
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="#" onclick="showAbstract('${result.url}')">${result.title}</a>`;
-                resultsList.appendChild(li);
-            });
-        });
-
-        function showAbstract(resultUrl) {
-            let apiUrl;
-
-            if (resultUrl.includes('pubmed')) {
-                const pubmedId = extractIdFromUrl(resultUrl);
-                apiUrl = `https://api.ncbi.nlm.nih.gov/lit/ctxp/v1/pubmed/?id=${pubmedId}`;
-            } else if (resultUrl.includes('semanticscholar')) {
-                const paperId = extractIdFromUrl(resultUrl);
-                apiUrl = `https://api.semanticscholar.org/v1/paper/${paperId}`;
-            } else if (resultUrl.includes('sciencedirect')) {
-                const doi = extractDOIFromUrl(resultUrl);
-                apiUrl = `https://api.elsevier.com/content/article/doi/${doi}?apiKey=your_api_key`;
-            }
-
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    let abstractText = '';
-                    let fullTextLink = '';
-
-                    if (resultUrl.includes('pubmed')) {
-                        abstractText = data.abstract || 'No abstract available.';
-                        fullTextLink = data.link || resultUrl;
-                    } else if (resultUrl.includes('semanticscholar')) {
-                        abstractText = data.abstract || 'No abstract available.';
-                        fullTextLink = data.url || resultUrl;
-                    } else if (resultUrl.includes('sciencedirect')) {
-                        abstractText = data['coredata']['dc:description'] || 'No abstract available.';
-                        fullTextLink = data['coredata']['link'][0]['@href'] || resultUrl;
-                    }
-
-                    document.getElementById('abstract-text').textContent = abstractText;
-                    const paperLink = document.getElementById('paper-link');
-                    paperLink.href = fullTextLink;
-                    paperLink.style.display = 'block';
-                })
-                .catch(error => console.error('Error fetching paper details:', error));
-        }
-
-        function extractIdFromUrl(url) {
-            return url.split('/').pop();
-        }
-
-        function extractDOIFromUrl(url) {
-            return url.match(/10.\d{4,9}\/[-._;()\/:A-Z0-9]+/i)[0];
-        }
-    </script>
+			<!-- Section for searching papers -->
+			<section class="field-search">
+				<div class="field-search-content">
+					<h2><img src="images/search-icon.png" alt="Search Icon" class="heading-icon" /> Search Papers According to Your Field</h2>
+					<p>Find the most relevant papers tailored to your specific research area.</p>
+					
+					<!-- Custom search engine input -->
+					<script async src="https://cse.google.com/cse.js?cx=c57cd31c36a8f42b1"></script>
+					
+					<!-- Search box only -->
+					<div class="gcse-searchbox"></div>
+			
+					<!-- Search results will appear here -->
+					<div class="gcse-searchresults"></div>
+				</div>
+			</section>
+			    <!-- Results Section -->
+				<section class="search-results">
+					<div class="results-column">
+						<h2>Search Results</h2>
+						<!-- Left column for search results -->
+					</div>
+					<div class="abstract-column">
+						<h2>Abstract & Details</h2>
+						<!-- Right column for displaying abstract and details -->
+					</div>
+				</section>
+						
+	
 </body>
 </html>
