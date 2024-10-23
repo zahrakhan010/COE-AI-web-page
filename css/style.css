@@ -221,7 +221,7 @@ section {
     flex: 1; 
     padding: 20px; 
     border-right: 1px solid #ddd; /* Optional: Add a border between columns */
-    height: 400px; /* Set a specific height */
+    height: 800px; /* Set a specific height */
     overflow-y: auto; /* Enable vertical scrolling */
     background-color: #ffffff; /* Set a background color */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
