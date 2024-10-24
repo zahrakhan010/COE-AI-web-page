@@ -92,8 +92,54 @@
 			</section>
 
 			<!-- JavaScript to handle search and load results in iframe -->
-			
-
+			<script>
+				// Function to search papers using Semantic Scholar API
+				function searchPapers(query) {
+					const apiUrl = `https://api.semanticscholar.org/v1/paper/search?query=${encodeURIComponent(query)}`;
+					$.get(apiUrl, function(data) {
+						displayResults(data.data);
+					});
+				}
+		
+				// Function to display search results
+				function displayResults(papers) {
+					const resultsContainer = $('#searchResults');
+					resultsContainer.empty(); // Clear previous results
+					papers.forEach(paper => {
+						const paperLink = $('<a>')
+							.text(paper.title)
+							.attr('href', '#')
+							.attr('data-paper-id', paper.paperId)
+							.click(function(event) {
+								event.preventDefault(); // Prevent default link behavior
+								fetchPaperDetails(paper.paperId); // Fetch details
+								history.pushState({ paperId: paper.paperId }, '', `?paperId=${paper.paperId}`); // Change URL
+							});
+						resultsContainer.append($('<div>').append(paperLink));
+					});
+				}
+		
+				// Function to fetch paper details
+				function fetchPaperDetails(paperId) {
+					const apiUrl = `https://api.semanticscholar.org/v1/paper/${paperId}`;
+					$.get(apiUrl, function(data) {
+						$('#abstractText').text(data.abstract || "No abstract available.");
+					});
+				}
+		
+				// Event listener for search button
+				$('#searchButton').click(function() {
+					const query = $('#searchQuery').val();
+					searchPapers(query);
+				});
+		
+				// Handle back/forward navigation
+				window.onpopstate = function(event) {
+					if (event.state) {
+						fetchPaperDetails(event.state.paperId);
+					}
+				};
+			</script>
 
 								
 	
