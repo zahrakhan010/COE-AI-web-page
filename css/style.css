@@ -335,3 +335,15 @@ button:hover {
     height: 25px; /* Smaller size for PDF icon */
     margin-right: 5px; /* Space between icon and text */
 }
+
+/* footer styling */
+
+footer {
+    background-color: #376fe9; /* Same color as the header */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative; /* Adjust position if needed */
+    bottom: 0;
+    width: 100%;
+}
