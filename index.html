@@ -84,57 +84,30 @@
 				</div>
 				<!-- Right column for iframe to load the clicked paper -->
 				<div id="linkDetails" style="flex: 1; padding: 20px;">
-					<h3 id="selectedLinkTitle">Selected Paper Title</h3>
-					<p id="selectedLinkDescription">The abstract or description of the paper will appear here when you click a result.</p>
-					<iframe id="paperPreview" src="" style="width: 100%; height: 80%; border: none;"></iframe>
+					<!-- Iframe for displaying results -->
+					<iframe id="resultsFrame" src="" width="100%" height="100%" style="border: none;"></iframe>
 				</div>
 
 			</section>
 
-			
-			<!-- // Add this script to your HTML file, preferably just before the closing </body> tag -->
-
+			<!-- JavaScript to handle search and load results in iframe -->
 			<script>
-				document.addEventListener('DOMContentLoaded', function () {
-				  // Hook into the search result rendering event
-				  window.gcseCallback = function() {
-					// Attach event listeners to all search result links
-					const resultLinks = document.querySelectorAll('.gsc-webResult a');
-					
-					resultLinks.forEach(link => {
-					  link.addEventListener('click', function(event) {
-						// Only handle left-clicks
-						if (event.button === 0) {
-						  event.preventDefault();  // Prevent navigating away only on left-click
-						  
-						  const paperURL = this.href;  // Get the URL of the clicked paper
-						  const paperTitle = this.textContent;  // Get the title of the clicked paper
-			  
-						  // Update the displayed link and title in the right column
-						  const linkTitle = document.getElementById('selectedLinkTitle');
-						  const linkDescription = document.getElementById('selectedLinkDescription');
-						  const paperPreview = document.getElementById('paperPreview');
-			  
-						  linkTitle.textContent = paperTitle;  // Set the title in the right column
-						  linkDescription.textContent = "Preview of the paper:";
-						  paperPreview.src = paperURL;  // Set the URL for the iframe to display the paper
-						}
-					  });
+				// Listen for the search event
+				window.onload = function() {
+					const searchBox = document.querySelector('.gcse-search');
+					const iframe = document.getElementById('resultsFrame');
+		
+					// Handle the search submission
+					searchBox.addEventListener('submit', function(event) {
+						event.preventDefault(); // Prevent default form submission
+						const query = event.target.querySelector('input[name="q"]').value;
+						// Load the results page in the iframe with the query
+						iframe.src = 'results.html?q=' + encodeURIComponent(query);
 					});
-				  };
-			  
-				  // Ensure Google CSE invokes our callback after rendering results
-				  (function() {
-					const cse = document.createElement('script');
-					cse.src = 'https://cse.google.com/cse.js?cx=c57cd31c36a8f42b1';  // Replace with your search engine ID
-					document.body.appendChild(cse);
-				  })();
-				});
-			  </script>
-			  
+				};
+			</script>
 
-
-						
+								
 	
 </body>
 </html>
