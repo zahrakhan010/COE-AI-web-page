@@ -265,7 +265,6 @@ section {
 
 /* pdf styling */
 
-
 .pdf-upload-section {
     display: flex;
     padding: 20px;
@@ -283,6 +282,7 @@ section {
     background-color: #f9f9f9; /* Light background color */
     width: 300px; /* Fixed width for the container */
     height: 400px; /* Increased height */
+    overflow: hidden; /* Ensure the content doesn't overflow the container */
 }
 
 .pdf-upload-container h2 {
@@ -316,7 +316,7 @@ button:hover {
     padding: 10px; /* Padding inside the PDF display */
     width: 100%; /* Full width of the container */
     height: 250px; /* Fixed height for the display area */
-    overflow-y: auto; /* Scroll if overflow */
+    overflow-y: auto; /* Enable vertical scrolling if overflow */
 }
 
 .pdf-block {

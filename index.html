@@ -92,7 +92,8 @@
 			<section class="pdf-upload-section" style="display: flex; padding: 20px;">
 				<div class="pdf-upload-container">
 					<h2>Upload PDFs</h2>
-					<input type="file" id="pdfInput" accept=".pdf" multiple onchange="handleFileUpload()">
+					<input type="file" id="pdfInput" accept=".pdf" multiple style="display:none;" onchange="handleFileUpload()">
+					<button id="uploadBtn" style="margin-bottom: 10px;" onclick="document.getElementById('pdfInput').click();">Upload PDFs</button>
 					<div class="uploaded-pdfs">
 						<div id="pdfDisplay" class="pdf-display"></div>
 					</div>
