@@ -84,63 +84,14 @@
 				<!-- Right column to display the clicked paper preview -->
 				<div id="linkDetails" style="flex: 1; padding: 20px;">
 					<h1>Preview of the Paper</h1>
-					<h3 id="selectedLinkTitle">Selected Paper Title</h3>
-					<p id="selectedLinkDescription">The abstract of the paper will appear here when you click a result.</p>
 				</div>
 
 
 			</section>
 
 			<!-- JavaScript to handle search and load results in iframe -->
-			<script>
-				document.addEventListener('DOMContentLoaded', function () {
-				  // Hook into the search result rendering event
-				  window.gcseCallback = function() {
-					// Attach event listeners to all search result links
-					const resultLinks = document.querySelectorAll('.gsc-webResult a');
-					
-					resultLinks.forEach(link => {
-					  link.addEventListener('click', function(event) {
-						// Only handle left-clicks
-						if (event.button === 0) {
-						  event.preventDefault();  // Prevent navigating away only on left-click
-						  
-						  const paperURL = this.href;  // Get the URL of the clicked paper
-						  const paperTitle = this.textContent;  // Get the title of the clicked paper
-						  const paperId = this.getAttribute('data-paper-id');  // Assuming you have a data attribute for paper ID
-			  
-						  // Update the displayed link and title in the right column
-						  const linkTitle = document.getElementById('selectedLinkTitle');
-						  const linkDescription = document.getElementById('selectedLinkDescription');
-			  
-						  linkTitle.textContent = paperTitle;  // Set the title in the right column
-						  linkDescription.textContent = "Fetching abstract...";
-			  
-						  // Fetch the abstract from Semantic Scholar API
-						  fetch(`https://api.semanticscholar.org/v1/paper/${paperId}`)
-							.then(response => response.json())
-							.then(data => {
-							  const abstract = data.abstract || "Abstract not available.";
-							  linkDescription.textContent = abstract;  // Display the abstract
-							})
-							.catch(error => {
-							  console.error('Error fetching the abstract:', error);
-							  linkDescription.textContent = "Error fetching abstract.";
-							});
-						}
-					  });
-					});
-				  };
-			  
-				  // Ensure Google CSE invokes our callback after rendering results
-				  (function() {
-					const cse = document.createElement('script');
-					cse.src = 'https://cse.google.com/cse.js?cx=c57cd31c36a8f42b1';  // Replace with your search engine ID
-					document.body.appendChild(cse);
-				  })();
-				});
-			  </script>
-			  
+			
+
 
 								
 	
