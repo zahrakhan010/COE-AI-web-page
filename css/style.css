@@ -265,9 +265,14 @@ section {
 
 /* pdf styling */
 
-.pdf-upload-section {
+/* .pdf-upload-section {
     display: flex;
     padding: 20px;
+} */
+
+.content-container {
+    display: flex;
+    flex-direction: column; /* Make sections stack vertically */
 }
 
 .pdf-upload-container {
