@@ -265,15 +265,9 @@ section {
 
 /* pdf styling */
 
-
 .pdf-upload-section {
     display: flex;
     padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 100%; /* Full width of the section */
-    height: auto; /* Allow dynamic height */
 }
 
 .pdf-upload-container {
@@ -282,12 +276,11 @@ section {
     flex-direction: column;
     align-items: center; /* Center items horizontally */
     justify-content: center; /* Center items vertically */
-    gap: 10px; /* Spacing between elements */
-    width: 300px; /* Fixed width for the container */
-    height: 300px; /* Fixed height for the container */
-    border: 1px solid #ccc; /* Border for the upload container */
+    border: 2px solid #376fe9; /* Boundary box for the container */
     border-radius: 8px; /* Rounded corners */
     padding: 20px; /* Padding inside the container */
+    background-color: #f9f9f9; /* Light background color */
+    width: 300px; /* Fixed width for the container */
 }
 
 .pdf-upload-container h2 {
@@ -300,13 +293,13 @@ section {
 }
 
 button {
-    padding: 8px 16px; /* Medium button size */
+    padding: 8px 12px; /* Smaller button size */
     background-color: #376fe9;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%; /* Full width */
+    width: auto; /* Automatic width */
 }
 
 button:hover {
@@ -314,32 +307,23 @@ button:hover {
 }
 
 .uploaded-pdfs {
-    flex: 1;
-    display: flex;
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
-}
-
-.pdf-display {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px dashed #ccc; /* Dashed border for the PDF display area */
-    width: 150px; /* Set fixed width */
-    height: 150px; /* Set fixed height */
-    justify-content: center; /* Center items vertically */
+    margin-top: 20px; /* Space above the PDF display */
+    border: 1px solid #ccc; /* Border for the PDF display area */
     border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Padding inside the PDF display */
+    width: 100%; /* Full width of the container */
+    height: 150px; /* Fixed height */
+    overflow-y: auto; /* Scroll if overflow */
 }
 
 .pdf-block {
     display: flex;
-    flex-direction: row;
     align-items: center;
     margin-top: 5px; /* Space between PDF icons */
 }
 
 .pdf-icon {
-    width: 30px; /* Reduced size for PDF icon */
-    height: 30px; /* Reduced size for PDF icon */
+    width: 25px; /* Smaller size for PDF icon */
+    height: 25px; /* Smaller size for PDF icon */
     margin-right: 5px; /* Space between icon and text */
 }

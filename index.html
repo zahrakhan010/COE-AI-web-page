@@ -93,56 +93,47 @@
 				<div class="pdf-upload-container">
 					<h2>Upload PDFs</h2>
 					<input type="file" id="pdfInput" accept=".pdf" multiple>
-					<button id="uploadBtn" onclick="handleFileUpload()">Upload PDF</button>
+					<button id="uploadBtn" onclick="handleFileUpload()">Upload PDFs</button>
 					<div class="uploaded-pdfs">
 						<div id="pdfDisplay" class="pdf-display"></div>
 					</div>
 				</div>
 				<div class="pdf-upload-empty-space" style="flex: 1;"></div>
 			</section>
-
+			
 			<script>
 				// Function to handle file upload
 				let uploadedFiles = [];
-
+		
 				function handleFileUpload() {
 					const fileInput = document.getElementById('pdfInput');
 					const fileList = fileInput.files;
 					const pdfDisplay = document.getElementById('pdfDisplay');
-
+		
 					// Append new files to the uploadedFiles array
 					for (let i = 0; i < fileList.length; i++) {
 						uploadedFiles.push(fileList[i]);
 					}
-
+		
 					// Clear and then update the display
 					pdfDisplay.innerHTML = ''; // Clear the current display
-
+		
 					uploadedFiles.forEach(file => {
 						const block = document.createElement('div');
 						block.classList.add('pdf-block');
-
+		
 						const img = document.createElement('img');
 						img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg'; // PDF icon
 						img.classList.add('pdf-icon');
-
+		
 						const fileName = document.createElement('span');
 						fileName.textContent = file.name;
-
+		
 						block.appendChild(img);
 						block.appendChild(fileName);
-
+		
 						pdfDisplay.appendChild(block);
 					});
-				}
-
-				function submitPDFs() {
-					if (uploadedFiles.length === 0) {
-						alert("Please upload at least one PDF file.");
-						return;
-					}
-					alert(`${uploadedFiles.length} PDFs submitted for processing.`);
-					// Implement further logic for sending PDFs to the server or processing them here
 				}
 			</script>
 
