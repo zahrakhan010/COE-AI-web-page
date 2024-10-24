@@ -84,26 +84,58 @@
 				</div>
 				<!-- Right column for iframe to load the clicked paper -->
 				<div id="linkDetails" style="flex: 1; padding: 20px;">
-					<!-- Iframe for displaying results -->
-					<iframe id="resultsFrame" src="" width="100%" height="100%" style="border: none;"></iframe>
-				</div>
+					<h2>Abstract</h2>
+					<p id="abstractText">Click on a paper title to see its abstract here.</p>				</div>
 
 			</section>
 
 			<!-- JavaScript to handle search and load results in iframe -->
 			<script>
-				// Listen for the search event
-				window.onload = function() {
-					const searchBox = document.querySelector('.gcse-search');
-					const iframe = document.getElementById('resultsFrame');
-		
-					// Handle the search submission
-					searchBox.addEventListener('submit', function(event) {
-						event.preventDefault(); // Prevent default form submission
-						const query = event.target.querySelector('input[name="q"]').value;
-						// Load the results page in the iframe with the query
-						iframe.src = 'results.html?q=' + encodeURIComponent(query);
+				// Function to search papers using Semantic Scholar API
+				function searchPapers(query) {
+					const apiUrl = `https://api.semanticscholar.org/v1/paper/search?query=${encodeURIComponent(query)}`;
+					$.get(apiUrl, function(data) {
+						displayResults(data.data);
 					});
+				}
+		
+				// Function to display search results
+				function displayResults(papers) {
+					const resultsContainer = $('#searchResults');
+					resultsContainer.empty(); // Clear previous results
+					papers.forEach(paper => {
+						const paperLink = $('<a>')
+							.text(paper.title)
+							.attr('href', '#')
+							.attr('data-paper-id', paper.paperId)
+							.click(function(event) {
+								event.preventDefault(); // Prevent default link behavior
+								fetchPaperDetails(paper.paperId); // Fetch details
+								history.pushState({ paperId: paper.paperId }, '', `?paperId=${paper.paperId}`); // Change URL
+							});
+						resultsContainer.append($('<div>').append(paperLink));
+					});
+				}
+		
+				// Function to fetch paper details
+				function fetchPaperDetails(paperId) {
+					const apiUrl = `https://api.semanticscholar.org/v1/paper/${paperId}`;
+					$.get(apiUrl, function(data) {
+						$('#abstractText').text(data.abstract || "No abstract available.");
+					});
+				}
+		
+				// Event listener for search button
+				$('#searchButton').click(function() {
+					const query = $('#searchQuery').val();
+					searchPapers(query);
+				});
+		
+				// Handle back/forward navigation
+				window.onpopstate = function(event) {
+					if (event.state) {
+						fetchPaperDetails(event.state.paperId);
+					}
 				};
 			</script>
 
