@@ -267,23 +267,50 @@ section {
 
 
 .pdf-upload-section {
+    display: flex;
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    margin-top: 20px;
-    display: flex;
+    width: 100%; /* Full width of the section */
+    height: auto; /* Allow dynamic height */
 }
 
 .pdf-upload-container {
     flex: 1;
     display: flex;
     flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
     gap: 10px; /* Spacing between elements */
+    width: 300px; /* Fixed width for the container */
+    height: 300px; /* Fixed height for the container */
+    border: 1px solid #ccc; /* Border for the upload container */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the container */
+}
+
+.pdf-upload-container h2 {
+    margin: 0 0 10px; /* Spacing below the heading */
 }
 
 #pdfInput {
     margin-bottom: 10px;
+    width: 100%; /* Full width */
+}
+
+button {
+    padding: 8px 16px; /* Medium button size */
+    background-color: #376fe9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Full width */
+}
+
+button:hover {
+    background-color: #2c56b7;
 }
 
 .uploaded-pdfs {
@@ -300,7 +327,6 @@ section {
     border: 2px dashed #ccc; /* Dashed border for the PDF display area */
     width: 150px; /* Set fixed width */
     height: 150px; /* Set fixed height */
-    margin-left: 20px; /* Space between upload buttons and display */
     justify-content: center; /* Center items vertically */
     border-radius: 8px; /* Rounded corners */
 }
@@ -316,17 +342,4 @@ section {
     width: 30px; /* Reduced size for PDF icon */
     height: 30px; /* Reduced size for PDF icon */
     margin-right: 5px; /* Space between icon and text */
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #376fe9;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #2c56b7;
 }
