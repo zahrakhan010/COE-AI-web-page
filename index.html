@@ -65,30 +65,27 @@
 			</section>
 
 			<section style="display: flex; height: 100vh;">
-				
 				<!-- Left column for search results and content display -->
-
 				<div id="searchResults" style="flex: 1; padding: 20px; border-right: 1px solid #ddd;">
-					<!-- Instruction to open links in a new tab -->
-					<h2><img src="images/search-icon.png" alt="Search Icon" class="heading-icon" /> Search Papers According to Your Field</h2>
-
+					<h2>
+						<img src="images/search-icon.png" alt="Search Icon" class="heading-icon" />
+						Search Papers According to Your Field
+					</h2>
 					<p><strong><i class="fa fa-info-circle"></i> Tip:</strong> Open links in a new tab by right-clicking.</p>
 					
 					<!-- Search Box -->
 					<div class="gcse-search"></div>
 					
 					<!-- Results -->
-					<!-- <div id="results" class="gcse-searchresults-only"></div> -->
 					<div class="gcse-searchresults"></div>
-
+				</div>
+			
 				<!-- Right column to display the clicked paper preview -->
 				<div id="linkDetails" style="flex: 1; padding: 20px;">
 					<h1>Preview of the Paper</h1>
 					<h3 id="selectedLinkTitle">Selected Paper Title</h3>
 					<p id="selectedLinkDescription">The abstract of the paper will appear here when you click a result.</p>
 				</div>
-
-
 			</section>
 
 			<!-- JavaScript to handle search and load results in iframe -->
