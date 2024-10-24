@@ -82,36 +82,45 @@
 					<div class="gcse-searchresults"></div>
 
 				</div>
-				<!-- Right column to display the clicked link -->
+				<!-- Right column for iframe to load the clicked paper -->
 				<div id="linkDetails" style="flex: 1; padding: 20px;">
-					<h3 id="selectedLinkTitle">Selected Paper Title</h3>
-					<p id="selectedLinkDescription">The abstract or description of the paper will appear here when you click a result.</p>
-					<a id="selectedLinkURL" href="#" target="_blank">Open Paper</a>
+					<iframe id="paperFrame" src="" width="100%" height="100%" style="border: none;"></iframe>
 				</div>
+
 			</section>
 
 			
 			<!-- // Add this script to your HTML file, preferably just before the closing </body> tag -->
+			 
 			<script>
-				// Function to handle search result clicks
-				document.querySelectorAll('.search-result').forEach(item => {
-					item.addEventListener('click', function(event) {
-						event.preventDefault(); // Prevent the default link behavior
-						
-						// Get the title and abstract from the data attributes
-						const title = this.getAttribute('data-title');
-						const abstract = this.getAttribute('data-abstract');
-			
-						// Update the right column with the selected paper details
-						document.getElementById('paperTitle').textContent = title;
-						document.getElementById('paperAbstract').textContent = abstract;
-			
-						// Optional: If you want to open the link in a new tab, uncomment the following line
-						// window.open(this.href, '_blank'); // This will open the link in a new tab
+			document.addEventListener('DOMContentLoaded', function () {
+				// Hook into the search result rendering event
+				window.gcseCallback = function() {
+				// Attach event listeners to all search result links
+				const resultLinks = document.querySelectorAll('.gsc-webResult a');
+				
+				resultLinks.forEach(link => {
+					link.addEventListener('click', function(event) {
+					event.preventDefault();  // Prevent the default link behavior of opening in the same tab
+
+					const paperURL = this.href;  // Get the URL of the clicked paper
+
+					// Update the iframe's src to the clicked paper's URL
+					const iframe = document.getElementById('paperFrame');
+					iframe.src = paperURL;
 					});
 				});
+				};
+				
+				// Ensure Google CSE invokes our callback after rendering results
+				(function() {
+				const cse = document.createElement('script');
+				cse.src = 'https://cse.google.com/cse.js?cx=YOUR_SEARCH_ENGINE_ID';  // Replace with your search engine ID
+				document.body.appendChild(cse);
+				})();
+			});
 			</script>
-			
+
 			
 
 
