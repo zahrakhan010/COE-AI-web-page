@@ -84,9 +84,9 @@
 				</div>
 				<!-- Right column for iframe to load the clicked paper -->
 				<div id="linkDetails" style="flex: 1; padding: 20px;">
-					<h3 id="selectedLinkTitle">Selected Paper</h3>
-					<p id="selectedLinkDescription">The link to the paper will appear here when you click a result.</p>
-					<a id="selectedLinkURL" href="#" target="_blank">Open Paper in New Tab</a>
+					<h3 id="selectedLinkTitle">Selected Paper Title</h3>
+					<p id="selectedLinkDescription">The abstract or description of the paper will appear here when you click a result.</p>
+					<iframe id="paperPreview" src="" style="width: 100%; height: 80%; border: none;"></iframe>
 				</div>
 
 			</section>
@@ -113,12 +113,11 @@
 						  // Update the displayed link and title in the right column
 						  const linkTitle = document.getElementById('selectedLinkTitle');
 						  const linkDescription = document.getElementById('selectedLinkDescription');
-						  const linkURL = document.getElementById('selectedLinkURL');
+						  const paperPreview = document.getElementById('paperPreview');
 			  
 						  linkTitle.textContent = paperTitle;  // Set the title in the right column
-						  linkDescription.textContent = "Click the link below to open the paper:";
-						  linkURL.href = paperURL;  // Set the URL for the link
-						  linkURL.textContent = paperURL;  // Display the URL in the right column
+						  linkDescription.textContent = "Preview of the paper:";
+						  paperPreview.src = paperURL;  // Set the URL for the iframe to display the paper
 						}
 					  });
 					});
@@ -127,14 +126,12 @@
 				  // Ensure Google CSE invokes our callback after rendering results
 				  (function() {
 					const cse = document.createElement('script');
-					cse.src = 'https://cse.google.com/cse.js?cx=YOUR_SEARCH_ENGINE_ID';  // Replace with your search engine ID
+					cse.src = 'https://cse.google.com/cse.js?cx=c57cd31c36a8f42b1';  // Replace with your search engine ID
 					document.body.appendChild(cse);
 				  })();
 				});
 			  </script>
 			  
-
-			
 
 
 						
