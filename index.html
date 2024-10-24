@@ -103,24 +103,27 @@
 					
 					resultLinks.forEach(link => {
 					  link.addEventListener('click', function(event) {
-						event.preventDefault();  // Prevent the default behavior of navigating away
+						// Only handle left-clicks
+						if (event.button === 0) {
+						  event.preventDefault();  // Prevent navigating away only on left-click
+						  
+						  const paperURL = this.href;  // Get the URL of the clicked paper
+						  const paperTitle = this.textContent;  // Get the title of the clicked paper
 			  
-						const paperURL = this.href;  // Get the URL of the clicked paper
-						const paperTitle = this.textContent;  // Get the title of the clicked paper
+						  // Update the displayed link and title in the right column
+						  const linkTitle = document.getElementById('selectedLinkTitle');
+						  const linkDescription = document.getElementById('selectedLinkDescription');
+						  const linkURL = document.getElementById('selectedLinkURL');
 			  
-						// Update the displayed link and title in the right column
-						const linkTitle = document.getElementById('selectedLinkTitle');
-						const linkDescription = document.getElementById('selectedLinkDescription');
-						const linkURL = document.getElementById('selectedLinkURL');
-			  
-						linkTitle.textContent = paperTitle;  // Set the title in the right column
-						linkDescription.textContent = "Click the link below to open the paper:";
-						linkURL.href = paperURL;  // Set the URL for the link
-						linkURL.textContent = paperURL;  // Display the URL in the right column
+						  linkTitle.textContent = paperTitle;  // Set the title in the right column
+						  linkDescription.textContent = "Click the link below to open the paper:";
+						  linkURL.href = paperURL;  // Set the URL for the link
+						  linkURL.textContent = paperURL;  // Display the URL in the right column
+						}
 					  });
 					});
 				  };
-				  
+			  
 				  // Ensure Google CSE invokes our callback after rendering results
 				  (function() {
 					const cse = document.createElement('script');
