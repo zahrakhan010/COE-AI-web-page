@@ -89,7 +89,7 @@
 			</section>
 
 			<!-- New Section for PDF Uploads -->
-			<section class="pdf-upload-section" style="display: flex;">
+			<section class="pdf-upload-section" style="display: flex; padding: 20px;">
 				<div class="pdf-upload-container">
 					<h2>Upload PDFs</h2>
 					<input type="file" id="pdfInput" accept=".pdf" multiple>
@@ -97,45 +97,47 @@
 					<div class="uploaded-pdfs">
 						<div id="pdfDisplay" class="pdf-display"></div>
 					</div>
+					<button id="submitBtn" style="margin-top: 10px;">Submit PDFs</button>
 				</div>
 				<div class="pdf-upload-empty-space" style="flex: 1;"></div>
 			</section>
-			
+
 			<script>
 				// Function to handle file upload
 				let uploadedFiles = [];
-		
+
 				function handleFileUpload() {
 					const fileInput = document.getElementById('pdfInput');
 					const fileList = fileInput.files;
 					const pdfDisplay = document.getElementById('pdfDisplay');
-		
+
 					// Append new files to the uploadedFiles array
 					for (let i = 0; i < fileList.length; i++) {
 						uploadedFiles.push(fileList[i]);
 					}
-		
+
 					// Clear and then update the display
 					pdfDisplay.innerHTML = ''; // Clear the current display
-		
+
 					uploadedFiles.forEach(file => {
 						const block = document.createElement('div');
 						block.classList.add('pdf-block');
-		
+
 						const img = document.createElement('img');
 						img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg'; // PDF icon
 						img.classList.add('pdf-icon');
-		
+
 						const fileName = document.createElement('span');
 						fileName.textContent = file.name;
-		
+
 						block.appendChild(img);
 						block.appendChild(fileName);
-		
+
 						pdfDisplay.appendChild(block);
 					});
 				}
 			</script>
+
 
 			<script>
 				// Function to fetch paper details from Unpaywall

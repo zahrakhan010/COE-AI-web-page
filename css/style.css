@@ -275,12 +275,13 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
+    justify-content: flex-start; /* Align items to the start */
     border: 2px solid #376fe9; /* Boundary box for the container */
     border-radius: 8px; /* Rounded corners */
     padding: 20px; /* Padding inside the container */
     background-color: #f9f9f9; /* Light background color */
     width: 300px; /* Fixed width for the container */
+    height: 400px; /* Increased height */
 }
 
 .pdf-upload-container h2 {
@@ -300,6 +301,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     width: auto; /* Automatic width */
+    margin-top: 10px; /* Space above the submit button */
 }
 
 button:hover {
@@ -307,12 +309,12 @@ button:hover {
 }
 
 .uploaded-pdfs {
-    margin-top: 20px; /* Space above the PDF display */
+    margin-top: 10px; /* Space above the PDF display */
     border: 1px solid #ccc; /* Border for the PDF display area */
     border-radius: 8px; /* Rounded corners */
     padding: 10px; /* Padding inside the PDF display */
     width: 100%; /* Full width of the container */
-    height: 150px; /* Fixed height */
+    height: 250px; /* Fixed height for the display area */
     overflow-y: auto; /* Scroll if overflow */
 }
 
