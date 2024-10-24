@@ -88,6 +88,17 @@
 				</div>
 			</section>
 
+			<!-- New Section for PDF Uploads -->
+			<section class="pdf-upload-section">
+				<h2>Upload PDFs for Review</h2>
+				<p>Select multiple PDF files to upload:</p>
+				<input type="file" id="pdfInput" accept=".pdf" multiple onchange="handleFileUpload(event)">
+				<button onclick="submitPDFs()">Submit PDFs</button>
+
+				<!-- Grid for displaying uploaded PDF files -->
+				<ul id="pdfGrid"></ul>
+			</section>
+
 			<script>
 				// Function to fetch paper details from Unpaywall
 				async function fetchPaperDetails(doi) {
@@ -126,6 +137,55 @@
 					}
 				};
 				</script>
+
+
+				<script>
+					// Function to handle file upload
+					let uploadedFiles = [];
+
+					function handleFileUpload(event) {
+						const fileList = event.target.files;
+						const pdfGrid = document.getElementById('pdfGrid');
+
+						// Append new files to the uploadedFiles array
+						for (let i = 0; i < fileList.length; i++) {
+							uploadedFiles.push(fileList[i]);
+						}
+
+						// Clear and then update the display grid
+						pdfGrid.innerHTML = ''; // Clear the current grid
+
+						uploadedFiles.forEach(file => {
+							const block = document.createElement('li');
+							block.classList.add('pdf-block');
+
+							const img = document.createElement('img');
+							img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg'; // PDF icon
+
+							const fileName = document.createElement('span');
+							fileName.textContent = file.name;
+
+							const fileSize = document.createElement('p');
+							fileSize.textContent = `Size: ${(file.size / 1024).toFixed(2)} KB`; // Display size in KB
+
+							block.appendChild(img);
+							block.appendChild(fileName);
+							block.appendChild(fileSize);
+
+							pdfGrid.appendChild(block);
+						});
+					}
+
+					function submitPDFs() {
+						if (uploadedFiles.length === 0) {
+							alert("Please upload at least one PDF file.");
+							return;
+						}
+						alert(`${uploadedFiles.length} PDFs submitted for processing.`);
+						// Implement further logic for sending PDFs to the server or processing them here
+					}
+				</script>
+
 
 
 
