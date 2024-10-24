@@ -91,12 +91,15 @@
 			<!-- New Section for PDF Uploads -->
 			<section class="pdf-upload-section">
 				<h2>Upload PDFs for Review</h2>
-				<p>Select multiple PDF files to upload:</p>
-				<input type="file" id="pdfInput" accept=".pdf" multiple onchange="handleFileUpload(event)">
-				<button onclick="submitPDFs()">Submit PDFs</button>
+				<div class="pdf-upload-container">
+					<input type="file" id="pdfInput" accept=".pdf" multiple>
+					<button id="uploadBtn" onclick="handleFileUpload()">Upload PDFs</button>
+					<button id="submitBtn" onclick="submitPDFs()">Submit PDFs</button>
+				</div>
 
-				<!-- Grid for displaying uploaded PDF files -->
-				<ul id="pdfGrid"></ul>
+				<div class="uploaded-pdfs">
+					<div id="pdfDisplay" class="pdf-display"></div>
+				</div>
 			</section>
 
 			<script>
@@ -143,36 +146,34 @@
 					// Function to handle file upload
 					let uploadedFiles = [];
 
-					function handleFileUpload(event) {
-						const fileList = event.target.files;
-						const pdfGrid = document.getElementById('pdfGrid');
+					function handleFileUpload() {
+						const fileInput = document.getElementById('pdfInput');
+						const fileList = fileInput.files;
+						const pdfDisplay = document.getElementById('pdfDisplay');
 
 						// Append new files to the uploadedFiles array
 						for (let i = 0; i < fileList.length; i++) {
 							uploadedFiles.push(fileList[i]);
 						}
 
-						// Clear and then update the display grid
-						pdfGrid.innerHTML = ''; // Clear the current grid
+						// Clear and then update the display
+						pdfDisplay.innerHTML = ''; // Clear the current display
 
 						uploadedFiles.forEach(file => {
-							const block = document.createElement('li');
+							const block = document.createElement('div');
 							block.classList.add('pdf-block');
 
 							const img = document.createElement('img');
 							img.src = 'https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg'; // PDF icon
+							img.classList.add('pdf-icon');
 
 							const fileName = document.createElement('span');
 							fileName.textContent = file.name;
 
-							const fileSize = document.createElement('p');
-							fileSize.textContent = `Size: ${(file.size / 1024).toFixed(2)} KB`; // Display size in KB
-
 							block.appendChild(img);
 							block.appendChild(fileName);
-							block.appendChild(fileSize);
 
-							pdfGrid.appendChild(block);
+							pdfDisplay.appendChild(block);
 						});
 					}
 
@@ -185,8 +186,6 @@
 						// Implement further logic for sending PDFs to the server or processing them here
 					}
 				</script>
-
-
 
 
 								

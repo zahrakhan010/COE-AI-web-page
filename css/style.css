@@ -272,60 +272,53 @@ section {
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-top: 20px;
+    display: flex;
 }
 
-.pdf-upload-section h2 {
-    margin-bottom: 20px;
-}
-
-.pdf-upload-section p {
-    margin-bottom: 10px;
+.pdf-upload-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Spacing between elements */
 }
 
 #pdfInput {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-#pdfGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    list-style: none;
-    padding: 0;
+.uploaded-pdfs {
+    flex: 1;
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+}
+
+.pdf-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dashed #ccc; /* Dashed border for the PDF display area */
+    width: 150px; /* Set fixed width */
+    height: 150px; /* Set fixed height */
+    margin-left: 20px; /* Space between upload buttons and display */
+    justify-content: center; /* Center items vertically */
+    border-radius: 8px; /* Rounded corners */
 }
 
 .pdf-block {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    margin-top: 5px; /* Space between PDF icons */
 }
 
-.pdf-block img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-}
-
-.pdf-block span {
-    font-size: 14px;
-    color: #555;
-}
-
-.pdf-block p {
-    margin: 5px 0 0;
-    font-size: 12px;
-    color: #888;
+.pdf-icon {
+    width: 30px; /* Reduced size for PDF icon */
+    height: 30px; /* Reduced size for PDF icon */
+    margin-right: 5px; /* Space between icon and text */
 }
 
 button {
-    margin-top: 20px;
     padding: 10px 20px;
     background-color: #376fe9;
     color: white;
