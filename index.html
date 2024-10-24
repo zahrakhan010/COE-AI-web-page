@@ -92,8 +92,7 @@
 			<section class="pdf-upload-section" style="display: flex; padding: 20px;">
 				<div class="pdf-upload-container">
 					<h2>Upload PDFs</h2>
-					<input type="file" id="pdfInput" accept=".pdf" multiple>
-					<button id="uploadBtn" onclick="handleFileUpload()">Upload PDFs</button>
+					<input type="file" id="pdfInput" accept=".pdf" multiple onchange="handleFileUpload()">
 					<div class="uploaded-pdfs">
 						<div id="pdfDisplay" class="pdf-display"></div>
 					</div>
@@ -137,7 +136,6 @@
 					});
 				}
 			</script>
-
 
 			<script>
 				// Function to fetch paper details from Unpaywall
