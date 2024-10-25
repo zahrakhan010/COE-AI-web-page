@@ -1,0 +1,358 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: Century Gothic;
+}
+header{
+	background-image: url(../final.jpg);
+	height: 100vh;
+	background-size: cover;
+	background-position: top;
+	min-height: 100px;
+}
+
+
+
+/* ul{
+	float:right;
+	list-style-type: none;
+	margin-top: 30px;
+	margin-right:60px ;
+} */
+/* ul li{
+	display: inline-block;
+}
+ul li a{
+	text-decoration: none;
+	color: #fff;
+	padding: 5px 20px;
+	border: 1px solid transparent;
+	transition: 0.5s ease;
+
+}
+
+ul li a:hover{
+	background-color: #fff;
+	color: #000;
+}
+
+ul li.active a{
+background-color:#fff;
+	color: #000;
+
+} */
+
+.logo img {
+    float: left;
+    width: 150px;
+    height: auto;  /* Keeps the aspect ratio */
+    margin-top: 20px;  /* This will move the logo down by 20px */
+}
+
+.main {
+    max-width: 1600px;
+    margin: 20px auto 0;  /* Moves the container down by 20px from the top */
+}
+
+.title{
+	position: absolute;
+	top: 40%;
+	left: 38%;
+	transform: translate(-50%,-50%);
+}
+
+.title h1{
+	color: #fff;
+	font-size: 85px;
+}
+
+.button{
+	position: absolute;
+	top: 60%;
+	left: 34%;
+	transform: translate(-50%,-50%);
+}
+
+.btn{
+	border: 1px solid #fff;
+	padding: 5px 20px;
+	color: #fff;
+	transition: 0.6s ease;
+	font-size: 18px;
+	text-decoration: none;
+}
+
+.btn:hover{
+	background-color: #fff;
+	color: #000;
+}
+
+.sub-menu{
+	display: none;
+    top:6%;
+    position: relative;
+}
+
+.sub-menu ul{
+	position: absolute;
+
+}
+
+/* .main ul li:hover .sub-menu
+{
+	display: block;
+	position: absolute;
+	background-color: rgb(0,45,117);
+	margin-top: 12px;
+	margin-left: -8px;
+}
+
+.main ul li:hover .sub-menu ul 
+{
+	display: block;
+	margin:6px;
+
+}
+.main ul li:hover .sub-menu ul li
+{
+	width: 75px;
+	padding: 5px;
+	border-bottom: 1px#fff;
+	background: transparent;
+	transition: 0.4s ease;
+	text-align: left;
+	border-radius: 0;
+	
+}
+
+.main ul li:hover .sub-menu ul li:last-child 
+{
+	border-bottom: none;
+} */
+
+
+/* styling the section */
+
+.features {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Align items vertically in the center */
+    padding: 40px; /* Padding around the section */
+    background: linear-gradient(to right, #ffffff, #ffffff); /* Gradient background */
+    color: rgb(0, 0, 0); /* Text color */
+}
+
+.features-content {
+    flex: 1; /* Allow the content to take available space */
+    margin-right: 20px; /* Space between content and image */
+}
+
+.features-image {
+    flex: 1; /* Allow the image to take available space */
+}
+
+.features-image img {
+    max-width: 100%; /* Make image responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+.features h1 {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 3em; /* Adjust this value as needed */
+}
+
+.features h2 {
+    margin: 0; /* Remove default margin */
+    padding-bottom: 10px; /* Space below each heading */
+}
+
+.feature-list {
+    list-style: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.feature-list li {
+    margin: 10px 0; /* Space between bullet points */
+    font-size: 1.4em; /* Font size for bullet points */
+    display: flex; /* Use flexbox for icon and text alignment */
+    align-items: center; /* Align items vertically */
+}
+
+.feature-list li i {
+    color: #271adb; /* Icon color (gold) */
+    margin-right: 10px; /* Space between icon and text */
+}
+.features h1, .features h2, .feature-list li {
+    line-height: 1.5; /* Adjust the value as needed */
+}
+
+/* styling paragraph to right click to open link in new tab  */
+
+h2 {
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+    color: #333; /* Text color */
+    margin-bottom: 20px; /* Space below heading */
+}
+
+.heading-icon {
+    width:  30px;  /* Set desired width */
+    height: 30px; /* Set desired height */
+    object-fit: contain; /* Ensures the aspect ratio is maintained */
+    margin-right: 10px; /* Space between icon and text */
+}
+
+
+h2 img {
+    vertical-align: middle; /* Align icon with text */
+}
+
+
+/* adding styling to the search engine */
+/* Adding styling to the search engine */
+/* Search Results Styling */
+.gcse-searchresults .gsc-webResult {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+/* Title Styling */
+.gsc-webResult .gs-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Description Styling */
+.gsc-webResult .gs-snippet {
+    color: #333;
+    margin-top: 8px;
+    font-size: 0.95em;
+}
+
+/* URL Styling */
+.gsc-webResult .gs-visibleUrl-short {
+    font-size: 0.85em;
+    color: #888;
+    display: block;
+    margin-top: 4px;
+}
+
+/* Preview Button Styling */
+.gsc-webResult .preview-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    color: #fff;
+    background-color: #380dfc;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.gsc-webResult .preview-button:hover {
+    background-color: #1f3bd6;
+}
+
+/* Hover Effect on Result Container */
+.gcse-searchresults .gsc-webResult:hover {
+    transform: translateY(-2px);
+}
+
+
+/* adding the preview button */
+
+/* Additional styling for the preview button */
+
+        
+/* pdf styling */
+
+/* .pdf-upload-section {
+    display: flex;
+    padding: 20px;
+} */
+
+.content-container {
+    display: flex;
+    flex-direction: column; /* Make sections stack vertically */
+}
+
+.pdf-upload-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    justify-content: flex-start; /* Align items to the start */
+    border: 2px solid #376fe9; /* Boundary box for the container */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the container */
+    background-color: #f9f9f9; /* Light background color */
+    width: 300px; /* Fixed width for the container */
+    height: 400px; /* Increased height */
+    overflow: hidden; /* Ensure the content doesn't overflow the container */
+}
+
+.pdf-upload-container h2 {
+    margin: 0 0 10px; /* Spacing below the heading */
+}
+
+#pdfInput {
+    margin-bottom: 10px;
+    width: 100%; /* Full width */
+}
+
+button {
+    padding: 8px 12px; /* Smaller button size */
+    background-color: #376fe9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto; /* Automatic width */
+    margin-top: 10px; /* Space above the submit button */
+}
+
+button:hover {
+    background-color: #2c56b7;
+}
+
+.uploaded-pdfs {
+    margin-top: 10px; /* Space above the PDF display */
+    border: 1px solid #ccc; /* Border for the PDF display area */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Padding inside the PDF display */
+    width: 100%; /* Full width of the container */
+    height: 250px; /* Fixed height for the display area */
+    overflow-y: auto; /* Enable vertical scrolling if overflow */
+}
+
+.pdf-block {
+    display: flex;
+    align-items: center;
+    margin-top: 5px; /* Space between PDF icons */
+}
+
+.pdf-icon {
+    width: 25px; /* Smaller size for PDF icon */
+    height: 25px; /* Smaller size for PDF icon */
+    margin-right: 5px; /* Space between icon and text */
+}
+
+/* footer styling */
+
+footer {
+    background-color: #376fe9; /* Same color as the header */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative; /* Adjust position if needed */
+    bottom: 0;
+    width: 100%;
+}
