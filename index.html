@@ -197,8 +197,10 @@
 
 						// Add click event to update the preview section
 						previewButton.onclick = () => {
-							document.getElementById('selectedLinkTitle').innerText = title;
-							document.getElementById('selectedLinkDescription').innerText = description;
+							document.getElementById('selectedLinkTitle').innerText = title; // Update the title
+							document.getElementById('selectedLinkDescription').innerText = description; // Update the description
+							document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
+							document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
 						};
 
 						// Append the button to the result
@@ -209,8 +211,8 @@
 
 			// Continuously check for new results
 			function monitorResults() {
-				addPreviewButtons();
-				setTimeout(monitorResults, 1000); // Check every second
+				addPreviewButtons(); // Add the preview buttons to search results
+				setTimeout(monitorResults, 1000); // Check every second for new results
 			}
 
 			// Start monitoring after the search results have loaded
