@@ -140,88 +140,110 @@
 		}
 	</script>
 
+	<!-- scrap data -->
 	<script>
-		// Function to fetch paper details from Unpaywall
-		async function fetchPaperDetails(doi) {
-			const apiUrl = `https://api.unpaywall.org/v2/${doi}?email=zahrakhan5187@google.com`; // Replace with your email
+		// Function to fetch and display metadata
+		async function fetchMetadata(url) {
 			try {
-				const response = await fetch(apiUrl);
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				const data = await response.json();
-		
-				// Update the right column with paper details
-				document.getElementById('selectedLinkTitle').innerText = data.title || "No title available";
-				document.getElementById('selectedLinkDescription').innerText = data.abstract || "No abstract available.";
+				const response = await fetch(url);
+				const html = await response.text();
+				const parser = new DOMParser();
+				const doc = parser.parseFromString(html, 'text/html');
+	
+				// Attempt to extract title, authors, and abstract
+				const title = doc.querySelector('meta[property="og:title"]')?.content || doc.querySelector('title')?.innerText || "Title not found";
+				const authors = Array.from(doc.querySelectorAll('meta[name="citation_author"]')).map(el => el.content).join(', ') || "Authors not found";
+				const abstract = doc.querySelector('meta[name="description"]')?.content || "Abstract not found";
+	
+				// Update the preview section with fetched details
+				document.getElementById('selectedLinkTitle').innerText = title;
+				document.getElementById('selectedLinkAuthors').innerText = authors;
+				document.getElementById('selectedLinkDescription').innerText = abstract;
+				document.getElementById('selectedLinkUrl').href = url;
+	
 			} catch (error) {
-				console.error('Error fetching paper details:', error);
-				document.getElementById('selectedLinkDescription').innerText = "Error fetching abstract.";
+				console.error("Error fetching metadata:", error);
+				document.getElementById('selectedLinkTitle').innerText = "Failed to load title";
+				document.getElementById('selectedLinkAuthors').innerText = "Failed to load authors";
+				document.getElementById('selectedLinkDescription').innerText = "Failed to load abstract";
 			}
 		}
-		
-		// Example function to handle clicks on search results
-		document.addEventListener('click', function(event) {
-			if (event.target.matches('.result-item')) { // Adjust selector as needed
-				const doi = event.target.getAttribute('data-doi'); // Assuming each result has a data attribute with DOI
-				fetchPaperDetails(doi); // Fetch details for the clicked paper
-		
-				// Update URL dynamically
-				history.pushState({ doi: doi }, '', `?doi=${doi}`); // Change URL without reloading
-			}
-		});
-		
-		// Handle back/forward navigation
-		window.onpopstate = function(event) {
-			if (event.state) {
-				fetchPaperDetails(event.state.doi); // Fetch details based on state
-			}
-		};
-		</script>
+	
+		// Function to add a "Preview" button to each search result
+		function addPreviewButtons() {
+			const results = document.querySelectorAll('.gsc-webResult');
+			results.forEach(result => {
+				if (!result.querySelector('.preview-button')) {
+					const previewButton = document.createElement('button');
+					previewButton.innerText = "Preview";
+					previewButton.classList.add('preview-button');
+					
+					// Extract URL
+					const url = result.querySelector('.gs-title a').href;
+	
+					// Add click event to fetch metadata
+					previewButton.onclick = () => fetchMetadata(url);
+	
+					// Append the button to the result
+					result.appendChild(previewButton);
+				}
+			});
+		}
+	
+		// Continuously check for new results
+		function monitorResults() {
+			addPreviewButtons(); // Add the preview buttons to search results
+			setTimeout(monitorResults, 1000); // Check every second for new results
+		}
+	
+		// Start monitoring after the search results have loaded
+		setTimeout(monitorResults, 2000);
+	</script>
+	
 
-		<!-- Preview Button -->
+	<!-- Preview Button -->
 
-		<script>
+	<!-- <script>
 
-			// Function to add a "Preview" button to each search result
-			function addPreviewButtons() {
-				const results = document.querySelectorAll('.gsc-webResult');
-				results.forEach(result => {
-					if (!result.querySelector('.preview-button')) {
-						const previewButton = document.createElement('button');
-						previewButton.innerText = "Preview";
-						previewButton.classList.add('preview-button');
-						
-						// Extract title, URL, and description
-						const title = result.querySelector('.gs-title a').innerText;
-						const url = result.querySelector('.gs-title a').href;
-						const description = result.querySelector('.gs-snippet').innerText;
+		// Function to add a "Preview" button to each search result
+		function addPreviewButtons() {
+			const results = document.querySelectorAll('.gsc-webResult');
+			results.forEach(result => {
+				if (!result.querySelector('.preview-button')) {
+					const previewButton = document.createElement('button');
+					previewButton.innerText = "Preview";
+					previewButton.classList.add('preview-button');
+					
+					// Extract title, URL, and description
+					const title = result.querySelector('.gs-title a').innerText;
+					const url = result.querySelector('.gs-title a').href;
+					const description = result.querySelector('.gs-snippet').innerText;
 
-						// Add click event to update the preview section
-						previewButton.onclick = () => {
-							document.getElementById('selectedLinkTitle').innerText = title; // Update the title
-							document.getElementById('selectedLinkDescription').innerText = description; // Update the description
-							document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
-							document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
-						};
+					// Add click event to update the preview section
+					previewButton.onclick = () => {
+						document.getElementById('selectedLinkTitle').innerText = title; // Update the title
+						document.getElementById('selectedLinkDescription').innerText = description; // Update the description
+						document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
+						document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
+					};
 
-						// Append the button to the result
-						result.appendChild(previewButton);
-					}
-				});
-			}
+					// Append the button to the result
+					result.appendChild(previewButton);
+				}
+			});
+		}
 
-			// Continuously check for new results
-			function monitorResults() {
-				addPreviewButtons(); // Add the preview buttons to search results
-				setTimeout(monitorResults, 1000); // Check every second for new results
-			}
+		// Continuously check for new results
+		function monitorResults() {
+			addPreviewButtons(); // Add the preview buttons to search results
+			setTimeout(monitorResults, 1000); // Check every second for new results
+		}
 
-			// Start monitoring after the search results have loaded
-			setTimeout(monitorResults, 2000);
+		// Start monitoring after the search results have loaded
+		setTimeout(monitorResults, 2000);
 
 
-		</script>
+	</script> -->
 
 
 		 
