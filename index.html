@@ -177,26 +177,34 @@
 		}
 
 		function scrapeData() {
-			const url = document.getElementById('selectedLinkUrl').href; // Get the current URL
+			// Get the current URL from the preview section
+			const url = document.getElementById('selectedLinkUrl').href;
 
+			// Fetch the HTML content of the URL
 			fetch(url)
 				.then(response => response.text())
 				.then(html => {
+					// Parse the HTML content to extract data
 					const parser = new DOMParser();
 					const doc = parser.parseFromString(html, 'text/html');
-					
-					// Extract the paper details
-					const title = doc.querySelector('meta[name="citation_title"]')?.content || "Title not found";
-					const authors = doc.querySelector('meta[name="citation_author"]')?.content || "Authors not found";
-					const abstract = doc.querySelector('meta[name="description"]')?.content || "Abstract not available";
 
-					// Update the preview section with scraped data
+					// Try to retrieve the paper title, authors, and abstract
+					const title = doc.querySelector('h1, meta[name="citation_title"]')?.content || "Title not found";
+					const authorsMeta = doc.querySelectorAll('meta[name="citation_author"]');
+					const abstract = doc.querySelector('meta[name="description"], .abstract')?.content || "Abstract not available";
+
+					// If authors metadata tags are found, extract their content into an array
+					let authors = [];
+					authorsMeta.forEach(author => authors.push(author.content));
+
+					// Update the preview section with the scraped data
 					document.getElementById('selectedLinkTitle').innerText = title;
-					document.getElementById('selectedLinkAuthors').innerText = authors;
+					document.getElementById('selectedLinkAuthors').innerText = authors.length ? authors.join(', ') : "Authors not found";
 					document.getElementById('selectedLinkDescription').innerText = abstract;
 				})
 				.catch(error => {
 					console.error('Error fetching data:', error);
+					document.getElementById('selectedLinkDescription').innerText = "Error retrieving data.";
 				});
 		}
 
