@@ -176,6 +176,31 @@
 			});
 		}
 
+		function scrapeData() {
+			const url = document.getElementById('selectedLinkUrl').href; // Get the current URL
+
+			fetch(url)
+				.then(response => response.text())
+				.then(html => {
+					const parser = new DOMParser();
+					const doc = parser.parseFromString(html, 'text/html');
+					
+					// Extract the paper details
+					const title = doc.querySelector('meta[name="citation_title"]')?.content || "Title not found";
+					const authors = doc.querySelector('meta[name="citation_author"]')?.content || "Authors not found";
+					const abstract = doc.querySelector('meta[name="description"]')?.content || "Abstract not available";
+
+					// Update the preview section with scraped data
+					document.getElementById('selectedLinkTitle').innerText = title;
+					document.getElementById('selectedLinkAuthors').innerText = authors;
+					document.getElementById('selectedLinkDescription').innerText = abstract;
+				})
+				.catch(error => {
+					console.error('Error fetching data:', error);
+				});
+		}
+
+
 		// Continuously check for new results
 		function monitorResults() {
 			addPreviewButtons(); // Add the preview buttons to search results
