@@ -260,44 +260,6 @@ h2 img {
 }
 
 /* adding the preview button */
-/* Style for Preview Button */
-.preview-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-}
-.preview-button:hover {
-    background-color: #0056b3;
-}
-
-/* Styling for preview section */
-#linkDetails {
-    border: 1px solid #ddd;
-    padding: 20px;
-    background-color: #f9f9f9;
-    margin-top: 20px;
-}
-#linkDetails h1, #linkDetails h3, #linkDetails p {
-    margin-bottom: 15px;
-    font-family: Arial, sans-serif;
-}
-#linkDetails h3 {
-    font-size: 20px;
-    color: #333;
-}
-#selectedLinkAuthors {
-    color: #555;
-    font-style: italic;
-}
-#selectedLinkDescription {
-    font-size: 16px;
-    line-height: 1.5;
-}
 
 /* Additional styling for the preview button */
 
