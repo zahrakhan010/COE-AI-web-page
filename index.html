@@ -156,18 +156,51 @@
 					const previewButton = document.createElement('button');
 					previewButton.innerText = "Preview";
 					previewButton.classList.add('preview-button');
-					
+
 					// Extract title, URL, and description
 					const title = result.querySelector('.gs-title a').innerText;
 					const url = result.querySelector('.gs-title a').href;
 					const description = result.querySelector('.gs-snippet').innerText;
 
 					// Add click event to update the preview section
-					previewButton.onclick = () => {
-						document.getElementById('selectedLinkTitle').innerText = title; // Update the title
-						document.getElementById('selectedLinkDescription').innerText = description; // Update the description
-						document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
-						document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
+					previewButton.onclick = async () => {
+						// Update preview section
+						document.getElementById('selectedLinkTitle').innerText = title;
+						document.getElementById('selectedLinkDescription').innerText = description;
+						document.getElementById('selectedLinkUrl').innerText = url;
+						document.getElementById('selectedLinkUrl').href = url;
+
+						// Extract data from the dynamically updated link
+						const dynamicUrl = document.getElementById('selectedLinkUrl').href;
+
+						try {
+							// Fetch HTML from the dynamic URL
+							const response = await fetch(dynamicUrl);
+							if (!response.ok) throw new Error("Network response was not ok");
+
+							const htmlText = await response.text();
+
+							// Create a temporary DOM element to parse the HTML
+							const tempDiv = document.createElement('div');
+							tempDiv.innerHTML = htmlText;
+
+							// Extract the required data
+							const abstract = tempDiv.querySelector('blockquote.abstract.mathjax')?.innerText || "Abstract not found.";
+							const extractedTitle = tempDiv.querySelector('h1.title')?.innerText || "Title not found.";
+							
+							// Extract authors (assuming authors are in 'a.author' class)
+							const authorsElements = tempDiv.querySelectorAll('a.author');
+							const authors = Array.from(authorsElements).map(el => el.innerText.trim()).join(', ');
+
+							// Update the preview section with extracted data
+							document.getElementById('selectedLinkTitle').innerText = extractedTitle;
+							document.getElementById('selectedLinkAbstract').innerText = abstract;
+							document.getElementById('selectedLinkAuthors').innerText = authors || "Authors not found.";
+
+						} catch (error) {
+							console.error("Error fetching the URL:", error);
+							document.getElementById('selectedLinkAbstract').innerText = "Unable to fetch data due to CORS restrictions or network issues.";
+						}
 					};
 
 					// Append the button to the result
@@ -189,8 +222,6 @@
 
 
 	</script>
-
-
 		 
 
 		<!-- footer -->
