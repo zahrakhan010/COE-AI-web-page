@@ -157,6 +157,7 @@
 
 	<script>
 
+		// Function to add a "Preview" button to each search result
 		function addPreviewButtons() {
 			const results = document.querySelectorAll('.gsc-webResult');
 			results.forEach(result => {
@@ -170,35 +171,12 @@
 					const url = result.querySelector('.gs-title a').href;
 					const description = result.querySelector('.gs-snippet').innerText;
 
-					// Add click event to fetch data from the URL
+					// Add click event to update the preview section
 					previewButton.onclick = () => {
-						// Fetch the HTML from the URL
-						fetch(url)
-							.then(response => response.text())
-							.then(html => {
-								// Create a DOM parser to extract data
-								const parser = new DOMParser();
-								const doc = parser.parseFromString(html, 'text/html');
-
-								// Extract title, abstract, and author from the fetched HTML
-								const fetchedTitle = doc.querySelector('title')?.innerText || 'No title found';
-								const abstract = doc.querySelector('meta[name="description"]')?.content || 'No abstract found';
-								const authors = doc.querySelectorAll('.author'); // Adjust this selector based on the actual HTML structure
-
-								const authorsList = Array.from(authors).map(author => author.innerText).join(', ') || 'No authors found';
-
-								// Update the preview section with the fetched data
-								document.getElementById('selectedLinkTitle').innerText = fetchedTitle; // Update the title
-								document.getElementById('selectedLinkDescription').innerText = abstract; // Update the description
-								document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
-								document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
-								document.getElementById('selectedLinkAuthors').innerText = authorsList; // Update authors section
-							})
-							.catch(error => {
-								console.error('Error fetching the URL:', error);
-								// Handle errors, e.g., display an error message
-								document.getElementById('selectedLinkDescription').innerText = 'Failed to load preview data.';
-							});
+						document.getElementById('selectedLinkTitle').innerText = title; // Update the title
+						document.getElementById('selectedLinkDescription').innerText = description; // Update the description
+						document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
+						document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
 					};
 
 					// Append the button to the result
