@@ -157,8 +157,7 @@
 
 	<script>
 
-		// Function to add a "Preview" button to each search result
-		// Function to add a "Preview" button to each search result
+	// Function to add a "Preview" button to each search result
 		function addPreviewButtons() {
 			const results = document.querySelectorAll('.gsc-webResult');
 			results.forEach(result => {
@@ -170,33 +169,43 @@
 					// Extract title, URL, and description
 					const title = result.querySelector('.gs-title a').innerText;
 					const url = result.querySelector('.gs-title a').href;
+					const description = result.querySelector('.gs-snippet').innerText;
 
-					// Add click event to fetch data from the URL
-					previewButton.onclick = async () => {
-						try {
-							const response = await fetch(url);
-							if (!response.ok) {
-								throw new Error('Network response was not ok');
-							}
-							const text = await response.text();
-							const parser = new DOMParser();
-							const doc = parser.parseFromString(text, 'text/html');
-
-							// Extract desired information from the fetched document
-							const fetchedTitle = doc.querySelector('title') ? doc.querySelector('title').innerText : 'No title found';
-							const fetchedDescription = doc.querySelector('meta[name="description"]') ? doc.querySelector('meta[name="description"]').content : 'No description found';
-
-							// Update the preview section
-							document.getElementById('selectedLinkTitle').innerText = fetchedTitle; // Update the title
-							document.getElementById('selectedLinkDescription').innerText = fetchedDescription; // Update the description
-							document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
-							document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
-						} catch (error) {
-							console.error('Error fetching the URL:', error);
-							document.getElementById('selectedLinkTitle').innerText = 'Error fetching data';
-							document.getElementById('selectedLinkDescription').innerText = error.message;
-						}
+					// Add click event to update the preview section
+					previewButton.onclick = () => {
+						document.getElementById('selectedLinkTitle').innerText = title; // Update the title
+						document.getElementById('selectedLinkDescription').innerText = description; // Update the description
+						document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
+						document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
 					};
+
+
+
+				async function fetchArticleData(url) {
+					try {
+						const response = await fetch(url);
+						if (!response.ok) {
+							throw new Error('Network response was not ok');
+						}
+						
+						const text = await response.text();
+						const parser = new DOMParser();
+						const doc = parser.parseFromString(text, 'text/html');
+
+						const title = doc.querySelector('h1.title') ? doc.querySelector('h1.title').innerText : 'No title found';
+						const author = doc.querySelector('meta[name="author"]') ? doc.querySelector('meta[name="author"]').content : 'No author found';
+						const abstract = doc.querySelector('blockquote.abstract.mathjax"]') ? doc.querySelector('blockquote.abstract.mathjax"]').content : 'No abstract found';
+
+						console.log('Title:', title);
+						console.log('Author:', author);
+						console.log('Abstract:', abstract);
+
+						return { title, author, abstract };
+					} catch (error) {
+						console.error('Error fetching article data:', error);
+						return null;
+					}
+				}
 
 					// Append the button to the result
 					result.appendChild(previewButton);
@@ -204,6 +213,7 @@
 			});
 		}
 		
+
 		// Continuously check for new results
 		function monitorResults() {
 			addPreviewButtons(); // Add the preview buttons to search results
