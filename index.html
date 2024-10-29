@@ -81,10 +81,19 @@
 		</div>
 
 		<!-- Right column to display the clicked paper preview -->
+		<!-- <div id="linkDetails" style="flex: 1; padding: 20px;">
+			<h1>Preview of the Paper</h1>
+			<h3 id="selectedLinkTitle">Selected Paper Title</h3>
+			<p id="selectedLinkDescription">The abstract of the paper will appear here when you click a result.</p>
+			<p><strong>URL:</strong> <a id="selectedLinkUrl" href="#" target="_blank">Read Full Paper</a></p>
+		</div> -->
+
+		<!-- Right column to display the clicked paper preview -->
 		<div id="linkDetails" style="flex: 1; padding: 20px;">
 			<h1>Preview of the Paper</h1>
 			<h3 id="selectedLinkTitle">Selected Paper Title</h3>
 			<p id="selectedLinkDescription">The abstract of the paper will appear here when you click a result.</p>
+			<p><strong>Authors:</strong> <span id="selectedLinkAuthors">Authors will appear here.</span></p>
 			<p><strong>URL:</strong> <a id="selectedLinkUrl" href="#" target="_blank">Read Full Paper</a></p>
 		</div>
 		
@@ -148,7 +157,6 @@
 
 	<script>
 
-		// Function to add a "Preview" button to each search result
 		function addPreviewButtons() {
 			const results = document.querySelectorAll('.gsc-webResult');
 			results.forEach(result => {
@@ -156,51 +164,41 @@
 					const previewButton = document.createElement('button');
 					previewButton.innerText = "Preview";
 					previewButton.classList.add('preview-button');
-
+					
 					// Extract title, URL, and description
 					const title = result.querySelector('.gs-title a').innerText;
 					const url = result.querySelector('.gs-title a').href;
 					const description = result.querySelector('.gs-snippet').innerText;
 
-					// Add click event to update the preview section
-					previewButton.onclick = async () => {
-						// Update preview section
-						document.getElementById('selectedLinkTitle').innerText = title;
-						document.getElementById('selectedLinkDescription').innerText = description;
-						document.getElementById('selectedLinkUrl').innerText = url;
-						document.getElementById('selectedLinkUrl').href = url;
+					// Add click event to fetch data from the URL
+					previewButton.onclick = () => {
+						// Fetch the HTML from the URL
+						fetch(url)
+							.then(response => response.text())
+							.then(html => {
+								// Create a DOM parser to extract data
+								const parser = new DOMParser();
+								const doc = parser.parseFromString(html, 'text/html');
 
-						// Extract data from the dynamically updated link
-						const dynamicUrl = document.getElementById('selectedLinkUrl').href;
+								// Extract title, abstract, and author from the fetched HTML
+								const fetchedTitle = doc.querySelector('title')?.innerText || 'No title found';
+								const abstract = doc.querySelector('meta[name="description"]')?.content || 'No abstract found';
+								const authors = doc.querySelectorAll('.author'); // Adjust this selector based on the actual HTML structure
 
-						try {
-							// Fetch HTML from the dynamic URL
-							const response = await fetch(dynamicUrl);
-							if (!response.ok) throw new Error("Network response was not ok");
+								const authorsList = Array.from(authors).map(author => author.innerText).join(', ') || 'No authors found';
 
-							const htmlText = await response.text();
-
-							// Create a temporary DOM element to parse the HTML
-							const tempDiv = document.createElement('div');
-							tempDiv.innerHTML = htmlText;
-
-							// Extract the required data
-							const abstract = tempDiv.querySelector('blockquote.abstract.mathjax')?.innerText || "Abstract not found.";
-							const extractedTitle = tempDiv.querySelector('h1.title')?.innerText || "Title not found.";
-							
-							// Extract authors (assuming authors are in 'a.author' class)
-							const authorsElements = tempDiv.querySelectorAll('a.author');
-							const authors = Array.from(authorsElements).map(el => el.innerText.trim()).join(', ');
-
-							// Update the preview section with extracted data
-							document.getElementById('selectedLinkTitle').innerText = extractedTitle;
-							document.getElementById('selectedLinkAbstract').innerText = abstract;
-							document.getElementById('selectedLinkAuthors').innerText = authors || "Authors not found.";
-
-						} catch (error) {
-							console.error("Error fetching the URL:", error);
-							document.getElementById('selectedLinkAbstract').innerText = "Unable to fetch data due to CORS restrictions or network issues.";
-						}
+								// Update the preview section with the fetched data
+								document.getElementById('selectedLinkTitle').innerText = fetchedTitle; // Update the title
+								document.getElementById('selectedLinkDescription').innerText = abstract; // Update the description
+								document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
+								document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
+								document.getElementById('selectedLinkAuthors').innerText = authorsList; // Update authors section
+							})
+							.catch(error => {
+								console.error('Error fetching the URL:', error);
+								// Handle errors, e.g., display an error message
+								document.getElementById('selectedLinkDescription').innerText = 'Failed to load preview data.';
+							});
 					};
 
 					// Append the button to the result
@@ -208,7 +206,6 @@
 				}
 			});
 		}
-
 		
 
 		// Continuously check for new results

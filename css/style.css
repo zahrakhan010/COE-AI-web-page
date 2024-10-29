@@ -254,9 +254,49 @@ h2 img {
     color: #555; /* Text color for additional info */
 }
 
+/* abstract links in preview section */
 #linkDetails {
     flex: 1; /* Adjust width as needed */
     padding: 20px;
+    background-color: #f9f9f9; /* Light background color for contrast */
+    border-left: 1px solid #ddd; /* Optional: Border to separate from results */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    height: 800px; /* Match height with search results for a consistent layout */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+#linkDetails h1 {
+    font-size: 28px; /* Increase font size for the main heading */
+    color: #333; /* Main heading color */
+    margin-bottom: 15px; /* Space below heading */
+}
+
+#linkDetails h3 {
+    font-size: 24px; /* Title font size */
+    color: #007bff; /* Title color */
+    margin: 10px 0; /* Space above and below title */
+}
+
+#linkDetails p {
+    font-size: 16px; /* Font size for paragraphs */
+    color: #555; /* Text color for readability */
+    line-height: 1.5; /* Improve line spacing */
+    margin: 10px 0; /* Space between paragraphs */
+}
+
+#linkDetails strong {
+    color: #333; /* Strong text color */
+}
+
+/* Styling for the link */
+#selectedLinkUrl {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+#selectedLinkUrl:hover {
+    color: #0056b3; /* Darker shade on hover */
 }
 
 /* adding the preview button */
