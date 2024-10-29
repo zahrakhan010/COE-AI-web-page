@@ -157,7 +157,7 @@
 
 	<script>
 
-	// Function to add a "Preview" button to each search result
+		// Function to add a "Preview" button to each search result
 		function addPreviewButtons() {
 			const results = document.querySelectorAll('.gsc-webResult');
 			results.forEach(result => {
@@ -165,47 +165,42 @@
 					const previewButton = document.createElement('button');
 					previewButton.innerText = "Preview";
 					previewButton.classList.add('preview-button');
-					
+
 					// Extract title, URL, and description
 					const title = result.querySelector('.gs-title a').innerText;
 					const url = result.querySelector('.gs-title a').href;
 					const description = result.querySelector('.gs-snippet').innerText;
 
-					// Add click event to update the preview section
+					// Add click event to fetch and display data
 					previewButton.onclick = () => {
-						document.getElementById('selectedLinkTitle').innerText = title; // Update the title
-						document.getElementById('selectedLinkDescription').innerText = description; // Update the description
-						document.getElementById('selectedLinkUrl').innerText = url; // Update the displayed URL text
-						document.getElementById('selectedLinkUrl').href = url; // Set the URL as the href for the link
+						// Update preview section with title and description
+						document.getElementById('selectedLinkTitle').innerText = title;
+						document.getElementById('selectedLinkDescription').innerText = description;
+						document.getElementById('selectedLinkUrl').innerText = url;
+						document.getElementById('selectedLinkUrl').href = url;
+
+						// Fetch the HTML from the URL
+						fetch(url)
+							.then(response => response.text())
+							.then(html => {
+								// Create a new DOM parser
+								const parser = new DOMParser();
+								const doc = parser.parseFromString(html, 'text/html');
+
+								// Extract the required data (title, authors, abstract)
+								const paperTitle = doc.querySelector('h1.title').innerText; // Change selector based on actual HTML
+								const authors = Array.from(doc.querySelectorAll('a.author')).map(author => author.innerText).join(', '); // Change selector based on actual HTML
+								const abstract = doc.querySelector('blockquote.abstract.mathjax').innerText; // Change selector based on actual HTML
+
+								// Update the preview section with scraped data
+								document.getElementById('selectedLinkDescription').innerText = abstract; // Update abstract
+								document.getElementById('selectedLinkTitle').innerText = paperTitle; // Update paper title
+							})
+							.catch(error => console.error('Error fetching the document:', error));
 					};
 
-
-
-				async function fetchArticleData(url) {
-					try {
-						const response = await fetch(url);
-						if (!response.ok) {
-							throw new Error('Network response was not ok');
-						}
-						
-						const text = await response.text();
-						const parser = new DOMParser();
-						const doc = parser.parseFromString(text, 'text/html');
-
-						const title = doc.querySelector('h1.title') ? doc.querySelector('h1.title').innerText : 'No title found';
-						const author = doc.querySelector('meta[name="author"]') ? doc.querySelector('meta[name="author"]').content : 'No author found';
-						const abstract = doc.querySelector('blockquote.abstract.mathjax"]') ? doc.querySelector('blockquote.abstract.mathjax"]').content : 'No abstract found';
-
-						console.log('Title:', title);
-						console.log('Author:', author);
-						console.log('Abstract:', abstract);
-
-						return { title, author, abstract };
-					} catch (error) {
-						console.error('Error fetching article data:', error);
-						return null;
-					}
-				}
+					// Append the button to the result
+					result.appendChild(previewButton);
 
 					// Append the button to the result
 					result.appendChild(previewButton);
